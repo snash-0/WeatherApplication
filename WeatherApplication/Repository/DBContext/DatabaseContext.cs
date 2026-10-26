@@ -10,5 +10,7 @@ namespace WeatherApplication.Repository.DBContext
         }
         public DbSet<customers> customers { get; set; }
         public DbSet<transation> transation { get; set; }
+
+        public DbSet<user> user { get; set; }
     }
 }

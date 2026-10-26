@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WeatherApplication.Interface;
@@ -13,7 +14,7 @@ public class transationsController : ControllerBase
     {
         _transaction = transaction;
     }
-
+    [Authorize]
     // GET: api/transation
     [HttpGet]
     public async Task<ActionResult<IEnumerable<transation>>> Gettransation()
@@ -21,7 +22,7 @@ public class transationsController : ControllerBase
         var transitionList = await _transaction.GetTransitionList();
         return Ok(transitionList);
     }
-
+    [Authorize]
     // GET: api/transation/5
     [HttpGet("{transationid}")]
     public async Task<ActionResult<transation>> Gettransation(string transationid)
@@ -35,7 +36,7 @@ public class transationsController : ControllerBase
 
         return Ok(transation);
     }
-
+    [Authorize]
     // PUT: api/transation/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{transationid}")]
@@ -44,7 +45,7 @@ public class transationsController : ControllerBase
         var transationToUpdate = await _transaction.CreateTransition(transation);
         return Ok(transationToUpdate);
     }
-
+    [Authorize]
     // POST: api/transation
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
@@ -56,6 +57,7 @@ public class transationsController : ControllerBase
 
     // DELETE: api/transation/5
     [HttpDelete("{transationid}")]
+    [Authorize]
     public async Task<IActionResult> Deletetransation(int transationid)
     {
         var transation = await _transaction.DeleteTransition(transationid);
